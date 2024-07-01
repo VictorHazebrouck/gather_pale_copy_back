@@ -1,12 +1,12 @@
-const Socket = require("socket.io")
+const Socket = require("socket.io");
 
 /** @type {PlayerData[]}*/
 let Players = [];
 
 /**
- * 
- * @param {Socket.Server} io 
- * @param {Socket.Socket} socket 
+ *
+ * @param {Socket.Server} io
+ * @param {Socket.Socket} socket
  */
 function moveGameSocketHandler(io, socket) {
     socket.on("move", (data) => {
@@ -22,11 +22,10 @@ function moveGameSocketHandler(io, socket) {
     });
 }
 
-
 /**
- * 
- * @param {Socket.Server} io 
- * @param {Socket.Socket} socket 
+ *
+ * @param {Socket.Server} io
+ * @param {Socket.Socket} socket
  */
 function connectionGameSocketHandler(io, socket) {
     /** @type {HandshakeData} */
@@ -45,17 +44,14 @@ function connectionGameSocketHandler(io, socket) {
 
     Players.push(player);
 
-    socket.emit("connectionData", { Players });
+    io.to(socket.id).emit("connectionData", { Players });
     io.emit("newPlayerConnected", player);
-
-    console.log(Players)
 }
 
-
 /**
- * 
- * @param {Socket.Server} io 
- * @param {Socket.Socket} socket 
+ *
+ * @param {Socket.Server} io
+ * @param {Socket.Socket} socket
  */
 function disconnectionGameSocketHandler(io, socket) {
     /** @type {HandshakeData} */
@@ -73,7 +69,7 @@ module.exports = {
 
 /**
  * Represents move instructions data
- * 
+ *
  * @typedef {object} MoveInstructions
  * @property {string} userId - id from the movement initiator
  * @property {string} direction - direction in which the player wishes to move
@@ -83,7 +79,7 @@ module.exports = {
 
 /**
  * Represent initial connection
- * 
+ *
  * @typedef {object} HandshakeData
  * @property {string} userId - id from the player
  * @property {string} userName - name of the player
