@@ -1,0 +1,24 @@
+{
+    "name": "poker-back",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./bin/www",
+        "format": "prettier --write .",
+        "lint": "eslint ."
+    },
+    "devDependencies": {
+        "eslint": "^9.4.0",
+        "eslint-plugin-jsdoc": "^48.2.9",
+        "prettier": "^3.3.2"
+    },
+    "dependencies": {
+        "cookie-parser": "~1.4.4",
+        "cors": "^2.8.5",
+        "debug": "~2.6.9",
+        "express": "~4.16.1",
+        "morgan": "~1.9.1",
+        "socket.io": "^4.7.5",
+        "typescript": "^5.5.2"
+    }
+}
