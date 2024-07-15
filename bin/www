@@ -7,7 +7,7 @@
 var app = require("../app");
 var debug = require("debug")("poker-back:server");
 var http = require("http");
-
+const { ExpressPeerServer } = require("peer");
 /**
  * Get port from environment and store in Express.
  */
@@ -20,6 +20,14 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * Create PEER server.
+ */
+const peerServer = ExpressPeerServer(server, {
+    path: "/myapp",
+});
+app.use("/peer", peerServer);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -41,6 +49,7 @@ const io = new Server(server, {
 
 const registerSockets = require("../sockets/registerSockets");
 registerSockets(io);
+
 /**
  * Normalize a port into a number, string, or false.
  */
