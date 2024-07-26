@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  base-server:
+    build:
+      context: ./base-server
+      dockerfile: Dockerfile
+    ports:
+      - "3015:3015"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./base-server:/usr/src/app
+      - /usr/src/app/node_modules
+
+  peer-server:
+    build:
+      context: ./peer-server
+      dockerfile: Dockerfile
+    ports:
+      - "3016:3016"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./peer-server:/usr/src/app
+      - /usr/src/app/node_modules
